@@ -1,0 +1,2 @@
+# WASPSYN23
+WASPSYN23 Challenge at ISBI 2023
