@@ -1,0 +1,25 @@
+title: WASPSYN23
+description: An Out-of-Domain Synapse Detection Challenge for Microwasp Brain Connectomes.
+image: logo.jpg
+has_registration: True
+html:
+    overview: overview.html
+phases:
+    1:
+        phasenumber: 1
+        label: "First phase"
+        start_date: 2023-01-01
+        max_submissions: 500
+        scoring_program: scoring_program.zip
+        reference_data: reference_data.zip
+leaderboard:
+    leaderboards:
+        RESULTS: &RESULTS
+            label: Results
+            rank: 1
+    columns:
+        correct:
+            leaderboard: *RESULTS
+            label: correct
+            rank: 1
+            numeric_format: 1
