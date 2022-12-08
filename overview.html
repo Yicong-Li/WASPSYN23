@@ -1,5 +1,55 @@
-<H3>Welcome!</H3>
+<!DOCTYPE html>
+<html>
+<body>
 
+<h1>An Out-of-Domain Synapse Detection Challenge
+for Microwasp Brain Connectomes</h1>
+
+<p>This challenge is a part of <a href="https://2023.biomedicalimaging.org/en/">ISB 2023</a>  taking place on April 18-21th 2023.</p>
+
+<h2>Abstract</h2>
+<p>The size of image stacks in connectomic studies now reach the terabyte or even petabyte scale with a great diversity of appearance across brain regions and samples. However, manual annotation of neural structures, e.g., synapses, are time-consuming, which leads to limited training data often smaller than 0.001% of the test data in size. Domain adaptation and generalization approaches were proposed to address similar issues for natural images, which were less evaluated on connectomics data due to the lack of out-of-domain benchmarks. This challenge aims to push the boundary of the out-of-domain generalization methods for large-scale connectomics applications. To facilitate this challenge, we painstakingly annotated eighteen image chunks from a diverse set of <b>Megaphragma viggianii</b> brain regions in three whole-brain datasets. Successful algorithms that emerge from our challenge can potentially revolutionize real-world connectomics research and further efforts that aim to unravel the complexity of brain functions.</p>
+
+<h2>Task Description</h2>
+<p>In the <i>Megaphragma brain</i>, a synapse consists of a presynaptic terminal, accompanied by an electrondense motif called a T-bar, and multiple postsynaptic sites characterized by electron-dense regions. We design two computation tasks- </p>
 <p>
-	This is an example competition.
-</p>
+<ol>
+  <li><b>Presynaptic T-bar detection</b>: predict the center location of presynaptic T-bar structure from input image volumes.</li>
+  <li><b>Postsynaptic site detection</b>: predict the Postsynaptic site locations given the presynaptic T-bar locations and the input image volumes.</li>
+
+</ol> </p>
+
+<h2>Challenge Design</h2>
+<h3>Submission method</h3>
+<p>For submission, participants should create
+a .zip file that includes dense predictions for each task. The
+write-up should also include an algorithm speed assessment
+following the template released by the committee and should
+state if any public datasets were used (for pre-training, transfer
+learning, etc.). No code is required for submission.</p>
+
+<h3>Life cycle type</h3>
+<p>The challenge will continue to accept submissions
+after the deadline for continuous benchmarking. But
+results submitted after the deadline will not be included in the
+prize competition and the publication of the challenge.</p>
+
+<h3>Publication policy</h3>
+<p>The three top-performing teams are eligible
+to participate in a joint publication with the committee
+submitting to IEEE Transactions on Medical Imaging (TMI). There is a fixed maximum of two authors per team. The committee will also invite teams that submit particularly novel
+solutions to join as co-authors.</p>
+
+<h3>Organizer participation policy</h3>
+<p>Committee members will not participate in the challenge but only provide baseline results.</p>
+
+<h3>Award policy</h3>
+<p>certificate will be awarded to challenge
+top-3 teams (1 winner and 2 runner-ups). An iPad and two
+ebook readers will be awarded to the top-3 teams. We are
+also applying for some funding support from the Simons
+Foundation</p>
+
+</body>
+</html>
+
