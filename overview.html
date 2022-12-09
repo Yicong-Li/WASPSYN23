@@ -8,16 +8,20 @@ for Microwasp Brain Connectomes</h1>
 <p>This challenge is a part of <a href="https://2023.biomedicalimaging.org/en/">ISB 2023</a>  taking place on April 18-21th 2023.</p>
 
 <h2>Abstract</h2>
-<p>The size of image stacks in connectomic studies now reach the terabyte or even petabyte scale with a great diversity of appearance across brain regions and samples. However, manual annotation of neural structures, e.g., synapses, are time-consuming, which leads to limited training data often smaller than 0.001% of the test data in size. Domain adaptation and generalization approaches were proposed to address similar issues for natural images, which were less evaluated on connectomics data due to the lack of out-of-domain benchmarks. This challenge aims to push the boundary of the out-of-domain generalization methods for large-scale connectomics applications. To facilitate this challenge, we painstakingly annotated eighteen image chunks from a diverse set of <b>Megaphragma viggianii</b> brain regions in three whole-brain datasets. Successful algorithms that emerge from our challenge can potentially revolutionize real-world connectomics research and further efforts that aim to unravel the complexity of brain functions.</p>
+<p>The size of image stacks in connectomic studies now reach the terabyte or even petabyte scale with a great diversity of appearance across brain regions and samples. However, manual annotation of neural structures, e.g., synapses, are time-consuming, which leads to limited training data often smaller than 0.001% of the test data in size. Domain adaptation and generalization approaches were proposed to address similar issues for natural images, which were less evaluated on connectomics data due to the lack of out-of-domain benchmarks. This challenge aims to push the boundary of the out-of-domain generalization methods for large-scale connectomics applications. To facilitate this challenge, we painstakingly annotated eighteen image chunks from a diverse set of <i>Megaphragma viggianii</i> brain regions in three whole-brain datasets. Successful algorithms that emerge from our challenge can potentially revolutionize real-world connectomics research and further efforts that aim to unravel the complexity of brain functions.</p>
 
 <h2>Task Description</h2>
 <p>In the <i>Megaphragma brain</i>, a synapse consists of a presynaptic terminal, accompanied by an electrondense motif called a T-bar, and multiple postsynaptic sites characterized by electron-dense regions. We design two computation tasks- </p>
-<p>
+
 <ol>
   <li><b>Presynaptic T-bar detection</b>: predict the center location of presynaptic T-bar structure from input image volumes.</li>
   <li><b>Postsynaptic site detection</b>: predict the Postsynaptic site locations given the presynaptic T-bar locations and the input image volumes.</li>
 
-</ol> </p>
+</ol> 
+<figure>
+  <img src="./images/fig1_groundtruth_data.png" alt="groundtruth_data.png">
+  <figcaption>Synapse detection from 3D electron microscopy (EM) image volume. (a,b,c) The ZY, XZ, and XY planes of the 3D volume with manually annotated synapses; (d) 3D point cloud visualization of the annotated synapses: presynapses represented as yellow dots and postsynapses as cyan dots and edges connected to the corresponding presynapses.</figcaption>
+</figure>
 
 <h2>Challenge Design</h2>
 <h3>Submission method</h3>
@@ -48,7 +52,36 @@ solutions to join as co-authors.</p>
 top-3 teams (1 winner and 2 runner-ups). An iPad and two
 ebook readers will be awarded to the top-3 teams. We are
 also applying for some funding support from the Simons
-Foundation</p>
+Foundation.</p>
+
+<h2>Important Dates</h2>
+<ul>
+<li><b>15 Nov 2022: </b>Website launch on grand-challenge.org: release
+of training, validation, and single-phase test data
+in H5 format; code for metric computation; example
+submission and utility functions on GitHub</li>
+<li><b>15 Nov 2022-01 Mar 2023: </b> Registration and submission period</li>
+<li><b>02 Mar 2023: </b> Leaderboard release and invitation for workshop
+manuscript submission</li>
+<li><b>18 Apr 2023: </b> Leaderboard release and presentations at the
+workshop</li>
+</ul>
+
+<h2>Citation</h2>
+
+
+<h2>Organising Committee</h2>
+<ul>
+<li><a href="https://www.simonsfoundation.org/people/jingpeng-wu/">Jingpeng Wu</a></li>
+<li><a href="https://yicong-li.github.io/">Yicong Li</a></li>
+<li><a href="https://www.simonsfoundation.org/people/kazunori-shinomiya/">Kazunori Shinomiya</a></li>
+<li><a href="https://www.simonsfoundation.org/people/pat-gunn/">Pat Gunn</a></li>
+<li><a href="http://entomology.bio.msu.ru/en/about-2/people/polilov/">Alexey Polilov</a></li>
+<li><a href="https://vcg.seas.harvard.edu/people/hanspeter-pfister">Hanspeter Pfister</a></li>
+<li><a href="https://www.simonsfoundation.org/people/dmitri-mitya-chklovskii/">Dmitri
+Chklovskii</a></li>
+<li><a href="https://donglaiw.github.io/">Donglai Wei</a></li>
+</ul>
 
 </body>
 </html>
