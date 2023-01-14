@@ -1,33 +1,33 @@
-#!/usr/bin/env python
-import sys
-import os
-import os.path
+import h5py
+import numpy as np
+from scipy.optimize import linear_sum_assignment
 
-input_dir = sys.argv[1]
-output_dir = sys.argv[2]
+# read data
+path = 'datasets/training_set/train_sample3_vol1/syns_zyx_3680-4096_2944-3360_4448-4864.h5'
+f = h5py.File(path, 'r')
+pre_gt = f['pre'][:]
+f.close
 
-submit_dir = os.path.join(input_dir, 'res')
-truth_dir = os.path.join(input_dir, 'ref')
+# submission
+pre_test = np.random.randint(1, 1000, (160, 3))
 
-if not os.path.isdir(submit_dir):
-    print "%s doesn't exist" % submit_dir
+# calculate cost: l2-norm
+pre_cost_matrix = np.zeros((pre_test.shape[0], pre_gt.shape[0]))
+for i in range(pre_gt.shape[0]):
+    diff = pre_test - pre_gt[i, :]
+    square = np.power(diff, 2)
+    sum_of_square = np.sum(square, axis=1)
+    cost = np.sqrt(sum_of_square)
+    pre_cost_matrix[:, i] = cost
 
-if os.path.isdir(submit_dir) and os.path.isdir(truth_dir):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    output_filename = os.path.join(output_dir, 'scores.txt')
-    output_file = open(output_filename, 'wb')
-
-    truth_file = os.path.join(truth_dir, "truth.txt")
-    truth = open(truth_file).read()
-
-    submission_answer_file = os.path.join(submit_dir, "answer.txt")
-    submission_answer = open(submission_answer_file).read()
-
-    if truth == submission_answer:
-        output_file.write("correct:1")
-    else:
-        output_file.write("correct:0")
-
-    output_file.close()
+# assignments
+row_ind, col_ind = linear_sum_assignment(pre_cost_matrix)
+pre_test_id = np.arange(pre_test.shape[0])[row_ind]
+pre_gt_id = np.arange(pre_gt.shape[0])[col_ind]
+assignments = dict(zip(pre_test_id, pre_gt_id))
+associated_cost = pre_cost_matrix[row_ind, col_ind].sum()
+fp_and_fn = np.abs(pre_test.shape[0] - pre_gt.shape[0])
+print('assignments:', assignments)
+print('cost:', associated_cost)
+print('count of false negative & false positive:', fp_and_fn)
+print(row_ind)
