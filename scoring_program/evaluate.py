@@ -26,16 +26,14 @@ def assign_cal_f1(test, gt, radius, use_radius):
             if cost_m[i[0], i[1]] > r:
                 final_row_ind.remove(i[0])
                 final_col_ind.remove(i[1])
-    test_id = np.arange(test.shape[0])[final_row_ind]
-    gt_id = np.arange(gt.shape[0])[final_col_ind]
-    assignments = dict(zip(test_id, gt_id))
+    assignments = dict(zip(final_row_ind, final_col_ind))
     associated_cost = cost_m[final_row_ind, final_col_ind].sum()
 
     fp_fn_1 = np.abs(test.shape[0] - gt.shape[0])
     fp_fn_2 = (len(list(zip(row_ind, col_ind))) - len(list(zip(final_row_ind, final_col_ind)))) * 2
     tp = len(list(zip(final_row_ind, final_col_ind)))
     fscore = 2 * tp / (2 * tp + fp_fn_1 + fp_fn_2)
-    return assignments, associated_cost, fscore
+    return assignments, associated_cost, fscore, final_row_ind, final_col_ind
 
 # read data
 path_gt = 'datasets/training_set/train_sample3_vol1/syns_zyx_3680-4096_2944-3360_4448-4864.h5'
@@ -43,12 +41,28 @@ path_test = 'datasets/training_set/train_sample3_vol0/syns_zyx_2217-2617_4038-44
 f_gt = h5py.File(path_gt, 'r')
 f_test = h5py.File(path_test, 'r')
 pre_gt = f_gt['pre'][:]
+post_gt = f_gt['post'][:]
 pre_test = f_test['pre'][:]
+post_test = f_test['post'][:]
 f_gt.close
 f_test.close
 
-# evaluation
-pre_assignments, pre_associated_cost, pre_fscore = assign_cal_f1(pre_test, pre_gt, 2600, True)
-print('pre_assignments:', pre_assignments)
-print('pre_cost:', pre_associated_cost)
+# evaluation pre
+pre_assignments, pre_associated_cost, pre_fscore, pre_test_node, pre_gt_node = assign_cal_f1(pre_test, pre_gt, 2500, True)
+# print('pre_assignments:', pre_assignments)
+# print('pre_cost:', pre_associated_cost)
 print('pre_fscore:', pre_fscore)
+
+# evaluation post
+post_fscore_all = []
+for i in list(zip(pre_test_node, pre_gt_node)):
+    post_test_each = post_test[post_test[:, 0] == i[0]]
+    post_gt_each = post_gt[post_gt[:, 0] == i[1]]
+    post_assignments_each, post_associated_cost_each, post_fscore_each, _, _ = assign_cal_f1(post_test_each[:, 1:], post_gt_each[:, 1:], 2500, True)
+    post_fscore_all.append(post_fscore_each)
+post_fscore = np.mean(post_fscore_all)
+print('post_fscore:', post_fscore)
+
+# evaluation all
+final_fscore = 0.5 * pre_fscore + 0.5 * post_fscore
+print('fina_fscore:', final_fscore)
