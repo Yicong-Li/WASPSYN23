@@ -44,8 +44,8 @@ pre_gt = f_gt['pre'][:]
 post_gt = f_gt['post'][:]
 pre_test = f_test['pre'][:]
 post_test = f_test['post'][:]
-f_gt.close
-f_test.close
+f_gt.close()
+f_test.close()
 
 # evaluation pre
 pre_assignments, pre_associated_cost, pre_fscore, pre_test_node, pre_gt_node = assign_cal_f1(pre_test, pre_gt, 2500, True)
