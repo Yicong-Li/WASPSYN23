@@ -37,18 +37,28 @@ def assign_cal_f1(test, gt, radius, use_radius):
 
 # read data
 path_gt = 'datasets/training_set/train_sample3_vol1/syns_zyx_3680-4096_2944-3360_4448-4864.h5'
-path_test = 'datasets/training_set/train_sample3_vol0/syns_zyx_2217-2617_4038-4448_6335-6735.h5'
+path_test = 'datasets/training_set/train_sample3_vol1/syns_zyx_3680-4096_2944-3360_4448-4864.h5'
 f_gt = h5py.File(path_gt, 'r')
 f_test = h5py.File(path_test, 'r')
 pre_gt = f_gt['pre'][:]
 post_gt = f_gt['post'][:]
 pre_test = f_test['pre'][:]
 post_test = f_test['post'][:]
-f_gt.close
-f_test.close
+f_gt.close()
+f_test.close()
+
+# offset gt
+offset_zyx = path_gt.split('/')[-1].split('_')
+offset_z = float(offset_zyx[2][:4])
+offset_y = float(offset_zyx[3][:4])
+offset_x = float(offset_zyx[4][:4])
+pre_gt = pre_gt - [offset_z, offset_y, offset_x]
+post_gt[:, 1:] = post_gt[:, 1:] - [offset_z, offset_y, offset_x]
+# pre_test = pre_test - [offset_z, offset_y, offset_x]
+# post_test[:, 1:] = post_test[:, 1:] - [offset_z, offset_y, offset_x]
 
 # evaluation pre
-pre_assignments, pre_associated_cost, pre_fscore, pre_test_node, pre_gt_node = assign_cal_f1(pre_test, pre_gt, 2500, True)
+pre_assignments, pre_associated_cost, pre_fscore, pre_test_node, pre_gt_node = assign_cal_f1(pre_test, pre_gt, 2500.0, True)
 # print('pre_assignments:', pre_assignments)
 # print('pre_cost:', pre_associated_cost)
 print('pre_fscore:', pre_fscore)
@@ -58,11 +68,11 @@ post_fscore_all = []
 for i in list(zip(pre_test_node, pre_gt_node)):
     post_test_each = post_test[post_test[:, 0] == i[0]]
     post_gt_each = post_gt[post_gt[:, 0] == i[1]]
-    post_assignments_each, post_associated_cost_each, post_fscore_each, _, _ = assign_cal_f1(post_test_each[:, 1:], post_gt_each[:, 1:], 2500, True)
+    post_assignments_each, post_associated_cost_each, post_fscore_each, _, _ = assign_cal_f1(post_test_each[:, 1:], post_gt_each[:, 1:], 2500.0, True)
     post_fscore_all.append(post_fscore_each)
 post_fscore = np.mean(post_fscore_all)
 print('post_fscore:', post_fscore)
 
 # evaluation all
 final_fscore = 0.5 * pre_fscore + 0.5 * post_fscore
-print('fina_fscore:', final_fscore)
+print('final_fscore:', final_fscore)
