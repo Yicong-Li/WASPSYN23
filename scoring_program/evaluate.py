@@ -14,11 +14,6 @@ if (os.name == "nt"):
 else:
     filesep = '/'
 
-# # Default I/O directories:
-# root_dir = "C:/Users/nishi/Desktop/BITSPILANI/5-1/Jingpeng/"
-# default_gt = root_dir + "vol_02217/syns_zyx_2217-2617_4038-4448_6335-6735.h5"
-# default_test = root_dir + "vol_02217/syns_zyx_2217-2617_4038-4448_6335-6735.h5"
-
 # calculate cost: l2-norm
 def cost_matrix(test, gt):
     matrix = np.zeros((test.shape[0], gt.shape[0]))
