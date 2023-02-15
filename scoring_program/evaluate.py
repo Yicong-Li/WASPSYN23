@@ -104,8 +104,8 @@ def score( input_dir, output_dir):
             offset_x = float(offset_zyx[4].split('-')[0])
             pre_gt = pre_gt - [offset_z, offset_y, offset_x]
             post_gt[:, 1:] = post_gt[:, 1:] - [offset_z, offset_y, offset_x]
-            pre_test = pre_test - [offset_z, offset_y, offset_x]
-            post_test[:, 1:] = post_test[:, 1:] - [offset_z, offset_y, offset_x]
+#             pre_test = pre_test - [offset_z, offset_y, offset_x]
+#             post_test[:, 1:] = post_test[:, 1:] - [offset_z, offset_y, offset_x]
 
 
             # evaluation pre
