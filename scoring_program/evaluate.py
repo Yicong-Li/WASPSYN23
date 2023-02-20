@@ -73,9 +73,8 @@ def score(input_dir, output_dir):
         for i, solution_folder in enumerate(solution_folder_names):
             
             gt_file= ls(os.path.join(truth_dir, solution_folder,'*.h5'))[-1]
-            print(gt_file)
             predict_file = ls(os.path.join(submit_dir, solution_folder,'*predict.h5'))[-1]
-            print(predict_file)
+            print("For test_file ", predict_file)
             if (predict_file == []): raise IOError('Missing prediction file')
 
             # Read the solution and prediction values
@@ -93,7 +92,6 @@ def score(input_dir, output_dir):
             # offset gt
             #path_gt = 'datasets/training_set/train_sample3_vol1/syns_zyx_3680-4096_2944-3360_4448-4864.h5'
             offset_zyx = gt_file.split('/')[-1].split('_')
-            print("offset_gt_file is ", offset_zyx)
             offset_z = float(offset_zyx[2].split('-')[0])
             offset_y = float(offset_zyx[3].split('-')[0])
             offset_x = float(offset_zyx[4].split('-')[0])
