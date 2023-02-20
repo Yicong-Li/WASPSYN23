@@ -58,7 +58,7 @@ post_gt[:, 1:] = post_gt[:, 1:] - [offset_z, offset_y, offset_x]
 # post_test[:, 1:] = post_test[:, 1:] - [offset_z, offset_y, offset_x]
 
 # evaluation pre
-pre_assignments, pre_associated_cost, pre_fscore, pre_test_node, pre_gt_node = assign_cal_f1(pre_test, pre_gt, 2500.0, True)
+pre_assignments, pre_associated_cost, pre_fscore, pre_test_node, pre_gt_node = assign_cal_f1(pre_test, pre_gt, 8.5, True)
 # print('pre_assignments:', pre_assignments)
 # print('pre_cost:', pre_associated_cost)
 print("pre_fscore: %0.12f\n" % pre_fscore)
@@ -70,7 +70,7 @@ for i in list(zip(pre_test_node, pre_gt_node)):
     post_gt_each = post_gt[post_gt[:, 0] == i[1]]
     if len(post_test_each[:, 1:]) == 0 and len(post_gt_each[:, 1:]) == 0:
         continue
-    post_assignments_each, post_associated_cost_each, post_fscore_each, _, _ = assign_cal_f1(post_test_each[:, 1:], post_gt_each[:, 1:], 2500.0, True)
+    post_assignments_each, post_associated_cost_each, post_fscore_each, _, _ = assign_cal_f1(post_test_each[:, 1:], post_gt_each[:, 1:], 1.5, True)
     post_fscore_all.append(post_fscore_each)
 if post_fscore_all == []:
     post_fscore=0
