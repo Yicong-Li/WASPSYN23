@@ -46,7 +46,7 @@ def assign_cal_f1(test, gt, radius, use_radius):
     fscore = 2 * tp / (2 * tp + fp_fn_1 + fp_fn_2)
     return assignments, associated_cost, fscore, final_row_ind, final_col_ind
 
-def score( input_dir, output_dir):
+def score(input_dir, output_dir):
     
     total_sum = 0
     submit_dir = os.path.join(input_dir, 'res') 
@@ -93,7 +93,7 @@ def score( input_dir, output_dir):
             # offset gt
             #path_gt = 'datasets/training_set/train_sample3_vol1/syns_zyx_3680-4096_2944-3360_4448-4864.h5'
             offset_zyx = gt_file.split('/')[-1].split('_')
-            print("offset_gt_file is ",offset_zyx)
+            print("offset_gt_file is ", offset_zyx)
             offset_z = float(offset_zyx[2].split('-')[0])
             offset_y = float(offset_zyx[3].split('-')[0])
             offset_x = float(offset_zyx[4].split('-')[0])
@@ -114,11 +114,11 @@ def score( input_dir, output_dir):
             for i in list(zip(pre_test_node, pre_gt_node)):
                 post_test_each = post_test[post_test[:, 0] == i[0]]
                 post_gt_each = post_gt[post_gt[:, 0] == i[1]]
-                if(len(post_test_each[:,1:])==0 and len(post_gt_each[:,1:])==0):
+                if len(post_test_each[:, 1:]) == 0 and len(post_gt_each[:, 1:]) == 0:
                     continue
                 post_assignments_each, post_associated_cost_each, post_fscore_each, _, _ = assign_cal_f1(post_test_each[:,1:], post_gt_each[:, 1:], 2500.0, True)
                 post_fscore_all.append(post_fscore_each)
-            if(post_fscore_all ==[]):
+            if post_fscore_all == []:
                 post_fscore=0
             else:
                 post_fscore = np.mean(post_fscore_all)
@@ -128,7 +128,7 @@ def score( input_dir, output_dir):
             final_fscore = 0.5 * pre_fscore + 0.5 * post_fscore
             print("final_fscore: %0.12f\n" % final_fscore)
 
-            total_sum+=final_fscore
+            total_sum += final_fscore
 
         output_file.write("Mean_score: %0.12f\n" % (total_sum/9.0))
         output_file.close()
