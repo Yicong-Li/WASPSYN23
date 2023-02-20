@@ -128,7 +128,7 @@ def score(input_dir, output_dir):
 
             total_sum += final_fscore
 
-        output_file.write("Mean_score: %0.12f\n" % (total_sum/9.0))
+        output_file.write("correct: %0.12f\n" % (total_sum/9.0))
         output_file.close()
 
 if __name__ == "__main__":
